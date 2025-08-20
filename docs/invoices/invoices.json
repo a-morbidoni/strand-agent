@@ -1,0 +1,30 @@
+[
+  {
+    "total": "11000,00",
+    "fecha": "16/08/2025",
+    "receptor": "MORBIDONI ANDRES",
+    "fecha_procesamiento": "20/08/2025 17:34:47",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250820_173440_1360183158.jpg"
+  },
+  {
+    "total": "11000,00",
+    "fecha": "16/08/2025",
+    "receptor": "MORBIDONI ANDRES",
+    "fecha_procesamiento": "20/08/2025 17:37:09",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250820_173702_1360183158.jpg"
+  },
+  {
+    "total": "25000,00",
+    "fecha": "15/08/2025",
+    "receptor": "MORBIDONI ANDRES",
+    "fecha_procesamiento": "20/08/2025 17:42:03",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250820_174157_1360183158.jpg"
+  },
+  {
+    "total": "12,080.00",
+    "fecha": "20/08/2025",
+    "receptor": "Jose Miguel Eduardo Espinosa",
+    "fecha_procesamiento": "20/08/2025 17:47:52",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250820_174746_1360183158.jpg"
+  }
+]

@@ -41,8 +41,8 @@ def cargar_invoice_reader():
 def cargar_invoices():
     """Carga el módulo invoices.py"""
     try:
-        from invoices import subir_json_a_sheets
-        return subir_json_a_sheets
+        from invoices import append_ultima_invoice_a_sheets
+        return append_ultima_invoice_a_sheets
     except Exception as e:
         print(f"Error cargando invoices.py: {e}")
         return None
@@ -105,7 +105,7 @@ def procesar_imagen_telegram(imagen_path):
         print(f"Error en procesamiento: {e}")
         return False
     
-    # PASO 3: Subir a Google Sheets
+    # PASO 3: Subir a Google Sheets (solo última entrada)
     print("\nPASO 3: Subiendo a Google Sheets...")
     print("-" * 30)
     

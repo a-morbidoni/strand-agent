@@ -93,6 +93,54 @@ def subir_json_a_sheets(sheet_id: str, credentials_path: str = "credentials.json
         print(f"Error subiendo a Google Sheets: {e}")
         return False
 
+# NUEVO: Agregar solo la última entrada del JSON a Google Sheets
+def append_ultima_invoice_a_sheets(sheet_id: str, credentials_path: str = "credentials.json", archivo_json="docs/invoices/invoices.json"):
+    """
+    Lee el archivo JSON y agrega SOLO la última entrada a Google Sheets.
+    
+    Args:
+        sheet_id: ID de la Google Sheet
+        credentials_path: Ruta al archivo de credenciales
+        archivo_json: Ruta al archivo JSON
+    """
+    try:
+        print("Leyendo archivo JSON para última entrada...")
+        invoices = leer_json_invoices(archivo_json)
+        
+        if not invoices:
+            print("No hay datos para subir")
+            return False
+        
+        last_invoice = invoices[-1]
+        
+        print("Conectando a Google Sheets...")
+        scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+        creds = Credentials.from_service_account_file(credentials_path, scopes=scope)
+        client = gspread.authorize(creds)
+        
+        sheet = client.open_by_key(sheet_id).sheet1
+        print(f"Hoja abierta: {sheet.title}")
+        
+        # Agregar encabezados si la hoja está vacía
+        if not sheet.get_all_values():
+            headers = ["Fecha Procesamiento", "Fecha Transferencia", "Total", "Receptor", "Archivo Imagen"]
+            sheet.append_row(headers)
+            print("Encabezados agregados")
+        
+        row_data = [
+            last_invoice.get("fecha_procesamiento", ""),
+            last_invoice.get("fecha", "NO_ENCONTRADO"),
+            last_invoice.get("total", "NO_ENCONTRADO"),
+            last_invoice.get("receptor", "NO_ENCONTRADO"),
+            last_invoice.get("archivo_imagen", "")
+        ]
+        
+        sheet.append_row(row_data)
+        print("Último registro subido exitosamente")
+        return True
+    except Exception as e:
+        print(f"Error subiendo última entrada a Google Sheets: {e}")
+        return False
 # Ejecutar la sincronización
 if __name__ == "__main__":
     print("SINCRONIZADOR JSON A GOOGLE SHEETS")

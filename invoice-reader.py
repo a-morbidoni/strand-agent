@@ -4,6 +4,11 @@ import openai
 import os
 from datetime import datetime
 from dotenv import load_dotenv
+import re
+from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
+from string import Template
+
+from setup_google_sheets import CSVColumns, CSVColumnsNames
 
 # Cargar variables de entorno
 load_dotenv()
@@ -32,12 +37,32 @@ def leer_recibo(imagen_path: str):
         client = openai.OpenAI(api_key=api_key)
         
         # Analizar imagen con GPT-4 Vision
+        schema_example = {
+            CSVColumns.TOTAL.value: "monto numérico con decimales en formato 123.45",
+            CSVColumns.FECHA_TRANSFERENCIA.value: "DD/MM/AAAA",
+            CSVColumns.RECEPTOR.value: "nombre del destinatario o comercio, dejar en blanco si no aparece",
+            CSVColumns.CUENTA_ORIGEN.value: "institución o medio de pago (ej: Lemon, Mercado Pago, Santander, Ualá, etc.)",
+            CSVColumns.TRANSACTION_TYPE.value: "transferencia | débito | crédito | otro (si no está claro)",
+            CSVColumns.ID_TRANSACCION.value: "código o identificador de la operación, dejar en blanco si no se encuentra",
+            CSVColumns.REMITENTE.value: "nombre del remitente, dejar en blanco si no aparece",
+        }
+
+        text = f"""
+        Extrae de la imagen los siguientes campos y responde ÚNICAMENTE en formato JSON:
+        {json.dumps(schema_example, ensure_ascii=False, indent=4)}
+        Reglas:
+            - El campo "{CSVColumns.TRANSACTION_TYPE.value}" debe ser "débito" o "crédito" si explícitamente lo indica el ticket; si no aparece, asumir "transferencia".
+            - No incluyas texto extra ni explicaciones fuera del JSON.
+            - Si algún dato no se puede identificar con certeza, deja el campo en blanco.
+            - Respeta el formato exacto de claves y comillas del JSON.
+        """
+
         response = client.chat.completions.create(
             model="gpt-4o",
             messages=[{
                 "role": "user", 
                 "content": [
-                    {"type": "text", "text": "Extrae de esta imagen: total, fecha y receptor. Responde solo JSON: {'total':'123.45', 'fecha':'DD/MM/AAAA', 'receptor':'nombre'}"},
+                    {"type": "text", "text": text},
                     {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{image_data}"}}
                 ]
             }],
@@ -53,15 +78,78 @@ def leer_recibo(imagen_path: str):
         # Parsear JSON
         datos = json.loads(result)
         
+        # Normalizar monto a formato estándar 1,234.56
+        def _normalize_amount_string(amount_input) -> str:
+            s = str(amount_input).strip()
+            if not s:
+                return "0.00"
+            # Quitar símbolos de moneda y espacios, dejar solo dígitos, punto, coma y guión
+            s = re.sub(r'[^\d,\.\-]', '', s)
+            negative = False
+            if '-' in s:
+                # Si empieza con -, considerar negativo
+                if s.startswith('-'):
+                    negative = True
+                s = s.replace('-', '')
+            has_dot = '.' in s
+            has_comma = ',' in s
+            decimal_sep = None
+            thousands_sep = None
+            if has_dot and has_comma:
+                # El separador decimal suele ser el último símbolo separador
+                last_dot = s.rfind('.')
+                last_comma = s.rfind(',')
+                if last_dot > last_comma:
+                    decimal_sep = '.'
+                    thousands_sep = ','
+                else:
+                    decimal_sep = ','
+                    thousands_sep = '.'
+            elif has_dot:
+                last_dot = s.rfind('.')
+                digits_after = len(s) - last_dot - 1
+                if digits_after in (1, 2):
+                    decimal_sep = '.'
+                else:
+                    thousands_sep = '.'
+            elif has_comma:
+                last_comma = s.rfind(',')
+                digits_after = len(s) - last_comma - 1
+                if digits_after in (1, 2):
+                    decimal_sep = ','
+                else:
+                    thousands_sep = ','
+            # Eliminar miles
+            s_clean = s.replace(thousands_sep, '') if thousands_sep else s
+            # Unificar decimal a punto
+            if decimal_sep and decimal_sep != '.':
+                s_clean = s_clean.replace(decimal_sep, '.')
+            # Si no hay decimales, agregar .00
+            if '.' not in s_clean:
+                s_clean = s_clean + '.00'
+            try:
+                value = Decimal(s_clean).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+                if negative:
+                    value = -value
+            except (InvalidOperation, ValueError):
+                return "0.00"
+            return f"{value:,.2f}"
+
+        if 'total' in datos:
+            datos['total'] = _normalize_amount_string(datos.get('total'))
+        
         # Agregar metadatos
         datos["fecha_procesamiento"] = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         datos["archivo_imagen"] = imagen_path
         
         # Mostrar resultados
         print("DATOS EXTRAIDOS:")
-        print(f"Total: {datos.get('total', 'NO_ENCONTRADO')}")
-        print(f"Fecha: {datos.get('fecha', 'NO_ENCONTRADO')}")
-        print(f"Receptor: {datos.get('receptor', 'NO_ENCONTRADO')}")
+        print(f"{CSVColumnsNames.TOTAL.value}: {datos.get(CSVColumns.TOTAL.value, 'NO_ENCONTRADO')}")
+        print(f"{CSVColumnsNames.FECHA_TRANSFERENCIA.value}: {datos.get(CSVColumns.FECHA_TRANSFERENCIA.value, 'NO_ENCONTRADO')}")
+        print(f"{CSVColumnsNames.RECEPTOR.value}: {datos.get(CSVColumns.RECEPTOR.value, 'NO_ENCONTRADO')}")
+        print(f"{CSVColumnsNames.TRANSACTION_TYPE.value}: {datos.get(CSVColumns.TRANSACTION_TYPE.value, 'NO_ENCONTRADO')}")
+        print(f"{CSVColumnsNames.ID_TRANSACCION.value}: {datos.get(CSVColumns.ID_TRANSACCION.value, 'NO_ENCONTRADO')}")
+        print(f"{CSVColumnsNames.CUENTA_ORIGEN.value}: {datos.get(CSVColumns.CUENTA_ORIGEN.value, 'NO_ENCONTRADO')}")
         
         return datos
         

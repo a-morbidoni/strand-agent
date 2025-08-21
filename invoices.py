@@ -5,6 +5,8 @@ import os
 from datetime import datetime
 from dotenv import load_dotenv
 
+from setup_google_sheets import CSVColumns, CSVColumnsNames
+
 # Cargar variables de entorno
 load_dotenv()
 
@@ -67,7 +69,17 @@ def subir_json_a_sheets(sheet_id: str, credentials_path: str = "credentials.json
         
         # Agregar encabezados si la hoja está vacía
         if not sheet.get_all_values():
-            headers = ["Fecha Procesamiento", "Fecha Transferencia", "Total", "Receptor", "Archivo Imagen"]
+            headers = [
+                CSVColumnsNames.FECHA_PROCESAMIENTO.value,
+                CSVColumnsNames.FECHA_TRANSFERENCIA.value,
+                CSVColumnsNames.REMITENTE.value,
+                CSVColumnsNames.RECEPTOR.value,
+                CSVColumnsNames.TRANSACTION_TYPE.value,
+                CSVColumnsNames.TOTAL.value,
+                CSVColumnsNames.ID_TRANSACCION.value,
+                CSVColumnsNames.CUENTA_ORIGEN.value,
+                CSVColumnsNames.ARCHIVO_IMAGEN.value
+            ]
             sheet.append_row(headers)
             print("Encabezados agregados")
         
@@ -75,11 +87,15 @@ def subir_json_a_sheets(sheet_id: str, credentials_path: str = "credentials.json
         contador = 0
         for invoice in invoices:
             row_data = [
-                invoice.get("fecha_procesamiento", ""),
-                invoice.get("fecha", "NO_ENCONTRADO"),
-                invoice.get("total", "NO_ENCONTRADO"),
-                invoice.get("receptor", "NO_ENCONTRADO"),
-                invoice.get("archivo_imagen", "")
+                invoice.get(CSVColumns.FECHA_PROCESAMIENTO.value, ""),
+                invoice.get(CSVColumns.FECHA_TRANSFERENCIA.value, "NO_ENCONTRADO"),
+                invoice.get(CSVColumns.REMITENTE.value, "NO_ENCONTRADO"),
+                invoice.get(CSVColumns.RECEPTOR.value, "NO_ENCONTRADO"),
+                invoice.get(CSVColumns.TRANSACTION_TYPE.value, "NO_ENCONTRADO"),
+                invoice.get(CSVColumns.TOTAL.value, "NO_ENCONTRADO"),
+                invoice.get(CSVColumns.ID_TRANSACCION.value, ""),
+                invoice.get(CSVColumns.CUENTA_ORIGEN.value, "NO_ENCONTRADO"),
+                invoice.get(CSVColumns.ARCHIVO_IMAGEN.value, "NO_ENCONTRADO")
             ]
             
             sheet.append_row(row_data)
@@ -123,16 +139,20 @@ def append_ultima_invoice_a_sheets(sheet_id: str, credentials_path: str = "crede
         
         # Agregar encabezados si la hoja está vacía
         if not sheet.get_all_values():
-            headers = ["Fecha Procesamiento", "Fecha Transferencia", "Total", "Receptor", "Archivo Imagen"]
+            headers = ["Fecha Procesamiento", "Fecha Transferencia", "Total", "Receptor", "Cuenta Origen", "Id Transaccion", "Archivo Imagen"]
             sheet.append_row(headers)
             print("Encabezados agregados")
         
         row_data = [
-            last_invoice.get("fecha_procesamiento", ""),
-            last_invoice.get("fecha", "NO_ENCONTRADO"),
-            last_invoice.get("total", "NO_ENCONTRADO"),
-            last_invoice.get("receptor", "NO_ENCONTRADO"),
-            last_invoice.get("archivo_imagen", "")
+            last_invoice.get(CSVColumns.FECHA_PROCESAMIENTO.value, ""),
+            last_invoice.get(CSVColumns.FECHA_TRANSFERENCIA.value, "NO_ENCONTRADO"),
+            last_invoice.get(CSVColumns.REMITENTE.value, "NO_ENCONTRADO"),
+            last_invoice.get(CSVColumns.RECEPTOR.value, "NO_ENCONTRADO"),
+            last_invoice.get(CSVColumns.TRANSACTION_TYPE.value, "NO_ENCONTRADO"),
+            last_invoice.get(CSVColumns.TOTAL.value, "NO_ENCONTRADO"),
+            last_invoice.get(CSVColumns.ID_TRANSACCION.value, ""),
+            last_invoice.get(CSVColumns.CUENTA_ORIGEN.value, "NO_ENCONTRADO"),
+            last_invoice.get(CSVColumns.ARCHIVO_IMAGEN.value, "NO_ENCONTRADO")
         ]
         
         sheet.append_row(row_data)

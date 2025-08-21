@@ -7,35 +7,32 @@ Este script te ayuda a configurar las credenciales y la hoja de cálculo.
 import gspread
 from google.oauth2.service_account import Credentials
 import json
+from enum import Enum
+
+class CSVColumns(Enum):
+    FECHA_PROCESAMIENTO = "fecha_procesamiento"
+    FECHA_TRANSFERENCIA = "fecha"
+    REMITENTE = "remitente"
+    RECEPTOR = "receptor"
+    TRANSACTION_TYPE = "transaction_type"
+    TOTAL = "total"
+    ID_TRANSACCION = "id_transaccion"
+    CUENTA_ORIGEN = "cuenta_origen"
+    ARCHIVO_IMAGEN = "archivo_imagen"
+
+class CSVColumnsNames(Enum):
+    FECHA_PROCESAMIENTO = "Fecha Procesamiento"
+    FECHA_TRANSFERENCIA = "Fecha Transferencia"
+    REMITENTE = "Remitente"
+    RECEPTOR = "Receptor"
+    TRANSACTION_TYPE = "Tipo de Transaccion"
+    TOTAL = "Total"
+    ID_TRANSACCION = "Id Transaccion"
+    CUENTA_ORIGEN = "Cuenta Origen"
+    ARCHIVO_IMAGEN = "Archivo Imagen"
 
 def setup_google_sheets():
-    """
-    Guía paso a paso para configurar Google Sheets.
-    """
-    
-    print("🔧 Configuración de Google Sheets")
-    print("=" * 50)
-    
-    print("\n📋 PASOS PARA CONFIGURAR:")
-    print("1. Ve a la Google Cloud Console: https://console.cloud.google.com/")
-    print("2. Crea un nuevo proyecto o selecciona uno existente")
-    print("3. Habilita la Google Sheets API y Google Drive API")
-    print("4. Ve a 'Credenciales' > 'Crear credenciales' > 'Cuenta de servicio'")
-    print("5. Descarga el archivo JSON de credenciales")
-    print("6. Renombra el archivo a 'credentials.json' y ponlo en este directorio")
-    print("7. Crea una nueva Google Sheet y obtén su ID de la URL")
-    
-    print("\n📊 CONFIGURAR LA HOJA DE CÁLCULO:")
-    print("Tu Google Sheet debe tener estas columnas en la primera fila:")
-    print("A1: Fecha Procesamiento")
-    print("B1: Fecha Transferencia") 
-    print("C1: Total")
-    print("D1: Receptor")
-    
-    print("\n🔑 ID DE LA HOJA:")
-    print("El ID está en la URL de tu Google Sheet:")
-    print("https://docs.google.com/spreadsheets/d/[ESTE_ES_EL_ID]/edit")
-    
+    print("Configurando Google Sheets...")
     # Verificar si existe el archivo de credenciales
     try:
         with open("credentials.json", "r") as f:

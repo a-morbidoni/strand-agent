@@ -26,5 +26,199 @@
     "receptor": "Jose Miguel Eduardo Espinosa",
     "fecha_procesamiento": "20/08/2025 17:47:52",
     "archivo_imagen": "docs/invoices\\recibo_telegram_20250820_174746_1360183158.jpg"
+  },
+  {
+    "total": "25,000.00",
+    "fecha": "15/08/2025",
+    "receptor": "MORBIDONI ANDRES",
+    "fecha_procesamiento": "20/08/2025 17:55:34",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250820_175527_1360183158.jpg"
+  },
+  {
+    "total": "12,080.00",
+    "fecha": "20/08/2025",
+    "receptor": "Jose Miguel Eduardo Espinosa",
+    "fecha_procesamiento": "20/08/2025 18:01:26",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250820_180119_1360183158.jpg"
+  },
+  {
+    "total": "24,000.00",
+    "fecha": "22/12/2024",
+    "receptor": "Morbidoni Andres",
+    "fecha_procesamiento": "20/08/2025 18:03:28",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250820_180257_1360183158.jpg"
+  },
+  {
+    "total": "42,320.00",
+    "fecha": "08/08/2025",
+    "receptor": "Lepka Susana Evangelina",
+    "fecha_procesamiento": "20/08/2025 18:05:55",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250820_180548_1360183158.jpg"
+  },
+  {
+    "total": "28,500.00",
+    "fecha": "09/08/2025",
+    "receptor": "Los Boticarios",
+    "fecha_procesamiento": "20/08/2025 23:34:29",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250820_233420_1360183158.jpg"
+  },
+  {
+    "total": "5,000.00",
+    "fecha": "20/08/2025",
+    "receptor": "Santiago Buraschi",
+    "fecha_procesamiento": "21/08/2025 09:55:28",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250821_095515_1360183158.jpg"
+  },
+  {
+    "total": "1,200.00",
+    "fecha": "21/03/24",
+    "receptor": "Mercadito Mirco",
+    "fecha_procesamiento": "21/08/2025 09:57:41",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250821_095734_1360183158.jpg"
+  },
+  {
+    "total": "330,000.00",
+    "fecha": "21/08/2025",
+    "receptor": "Revol Jose Agustin",
+    "fecha_procesamiento": "21/08/2025 12:29:04",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250821_122851_1360183158.jpg"
+  },
+  {
+    "total": "5,000.00",
+    "fecha": "20/08/2025",
+    "receptor": "Santiago Buraschi",
+    "cuenta_origen": "DolarApp",
+    "id_transaccion": "0V1JX0N1D64J00ZG9Z64EL",
+    "fecha_procesamiento": "21/08/2025 12:48:25",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250821_124816_1360183158.jpg"
+  },
+  {
+    "total": "5,000.00",
+    "fecha": "20/08/2025",
+    "receptor": "Santiago Buraschi",
+    "cuenta_origen": "DolarApp",
+    "id_transaccion": "0V1JX0N1D64J00ZG9Z64EL",
+    "fecha_procesamiento": "21/08/2025 12:50:21",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250821_125011_1360183158.jpg"
+  },
+  {
+    "total": "11,000.00",
+    "fecha": "16/08/2025",
+    "receptor": "MORBIDONI ANDRES",
+    "cuenta_origen": "Brubank",
+    "id_transaccion": "",
+    "fecha_procesamiento": "21/08/2025 14:35:04",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250821_143455_1360183158.jpg"
+  },
+  {
+    "total": "30,000.00",
+    "fecha": "26/10/24",
+    "receptor": "SATURNO HOGAR SA",
+    "cuenta_origen": "VISA DEBITO",
+    "id_transaccion": "794830",
+    "fecha_procesamiento": "21/08/2025 15:06:29",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250821_150620_1360183158.jpg"
+  },
+  {
+    "total": "5,000.00",
+    "fecha": "20/08/2025",
+    "receptor": "Santiago Buraschi",
+    "cuenta_origen": "DolarApp",
+    "id_transaccion": "0V1JX0N1D64J00ZG9Z64EL",
+    "fecha_procesamiento": "21/08/2025 15:20:24",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250821_152014_1360183158.jpg"
+  },
+  {
+    "total": "12,080.00",
+    "fecha": "20/08/2025",
+    "receptor": "Jose Miguel Eduardo Espinosa",
+    "cuenta_origen": "DolarApp",
+    "id_transaccion": "1LMP68NKJL1WDRWP2R70EV",
+    "fecha_procesamiento": "21/08/2025 15:23:07",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250821_152259_1360183158.jpg"
+  },
+  {
+    "total": "42,320.00",
+    "fecha": "08/08/2025",
+    "receptor": "Lepka Susana Evangelina",
+    "cuenta_origen": "LEMON",
+    "id_transaccion": "7696970a-8a16-4eb4-a923-7d258e8f3efe",
+    "fecha_procesamiento": "21/08/2025 15:27:09",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250821_152702_1360183158.jpg"
+  },
+  {
+    "total": "42,320.00",
+    "fecha": "08/08/2025",
+    "receptor": "Lepka Susana Evangelina",
+    "cuenta_origen": "Lemon",
+    "tipo_transaccion": "transferencia",
+    "id_transaccion": "7696970a-8a16-4eb4-a923-7d258e8f3efe",
+    "fecha_procesamiento": "21/08/2025 15:32:54",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250821_153244_1360183158.jpg"
+  },
+  {
+    "total": "11,000.00",
+    "fecha": "16/08/2025",
+    "receptor": "MORBIDONI ANDRES",
+    "cuenta_origen": "Brubank",
+    "transaction_type": "transferencia",
+    "id_transaccion": "",
+    "fecha_procesamiento": "21/08/2025 15:46:27",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250821_154618_1360183158.jpg"
+  },
+  {
+    "total": "12,080.00",
+    "fecha": "20/08/2025",
+    "receptor": "Jose Miguel Eduardo Espinosa",
+    "cuenta_origen": "DolarApp",
+    "transaction_type": "transferencia",
+    "id_transaccion": "1LMP68NKJL1WDRWP2R70EV",
+    "remitente": "Andres Morbidoni",
+    "fecha_procesamiento": "21/08/2025 16:05:13",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250821_160504_1360183158.jpg"
+  },
+  {
+    "total": "12,080.00",
+    "fecha": "20/08/2025",
+    "receptor": "Jose Miguel Eduardo Espinosa",
+    "cuenta_origen": "DolarApp",
+    "transaction_type": "transferencia",
+    "id_transaccion": "1LMP68NKJL1WDRWP2R70EV",
+    "remitente": "Andres Morbidoni",
+    "fecha_procesamiento": "21/08/2025 16:09:01",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250821_160852_1360183158.jpg"
+  },
+  {
+    "total": "30,000.00",
+    "fecha": "26/10/2024",
+    "receptor": "SATURNO HOGAR SA",
+    "cuenta_origen": "VISA",
+    "transaction_type": "débito",
+    "id_transaccion": "794830",
+    "remitente": "",
+    "fecha_procesamiento": "21/08/2025 16:10:21",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250821_161009_1360183158.jpg"
+  },
+  {
+    "total": "42,320.00",
+    "fecha": "08/08/2025",
+    "receptor": "Lepka Susana Evangelina",
+    "cuenta_origen": "Lemon",
+    "transaction_type": "transferencia",
+    "id_transaccion": "7696970a-8a16-4eb4-a923-7d258e8f3efe",
+    "remitente": "Andres Morbidoni",
+    "fecha_procesamiento": "21/08/2025 16:15:12",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250821_161501_1360183158.jpg"
+  },
+  {
+    "total": "199,722.22",
+    "fecha": "10/08/2025",
+    "receptor": "PAGOS360*AguasCordobesas",
+    "cuenta_origen": "",
+    "transaction_type": "débito",
+    "id_transaccion": "4d95173d-c1f6-44de-9828-bd19fb0aed75",
+    "remitente": "",
+    "fecha_procesamiento": "21/08/2025 16:48:21",
+    "archivo_imagen": "docs/invoices\\recibo_telegram_20250821_164811_1360183158.jpg"
   }
 ]

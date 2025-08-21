@@ -75,18 +75,18 @@ class TelegramBot:
             logger.info(f"Imagen guardada en: {file_path}")
             
             # Llamar al orchestrator para procesar la imagen
-            await update.message.reply_text("🔄 Procesando con orchestrator...")
+            await update.message.reply_text("🔄 Leyendo datos del recibo...")
             
             resultado = await self.llamar_orchestrator_async(file_path)
             
             if resultado:
                 await update.message.reply_text(
-                    f"✅ Imagen procesada exitosamente por el orchestrator!\n\n"
-                    f"📊 Los datos han sido agregados al JSON y Google Sheets automáticamente."
+                    f"✅ Imagen procesada exitosamente!\n\n"
+                    f"📊 Los datos han sido agregados a Google Sheets automáticamente."
                 )
             else:
                 await update.message.reply_text(
-                    "❌ Error procesando el recibo con el orchestrator. "
+                    "❌ Error procesando el recibo. "
                     "Revisa los logs para más detalles."
                 )
                 
@@ -115,6 +115,8 @@ class TelegramBot:
                 "💰 Total\n"
                 "📅 Fecha\n"
                 "👤 Receptor\n\n"
+                "💳 Cuenta Origen\n"
+                "🔑 Id Transaccion\n"
                 "¡Pruébalo enviando una imagen!"
             )
         elif text.lower() in ['ayuda', 'help']:

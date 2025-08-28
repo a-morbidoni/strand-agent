@@ -5,7 +5,7 @@ ORQUESTADOR SIMPLE PARA FLUJO DE TELEGRAM
 Flujo:
 1. Telegram Bot recibe imagen -> Guarda en docs/invoices/
 2. Orchestrator recibe ruta de imagen
-3. Llama a invoice-reader.py para procesar imagen y guardar en JSON
+3. Llama a invoice_reader.py para procesar imagen y guardar en JSON
 4. Llama a invoices.py para subir JSON a Google Sheets
 
 Uso:
@@ -28,14 +28,14 @@ if os.name == 'nt':  # Windows
     sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
 
 def cargar_invoice_reader():
-    """Carga el módulo invoice-reader.py"""
+    """Carga el módulo invoice_reader.py"""
     try:
-        spec = importlib.util.spec_from_file_location("invoice_reader", "invoice-reader.py")
+        spec = importlib.util.spec_from_file_location("invoice_reader", "invoice_reader.py")
         invoice_reader = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(invoice_reader)
         return invoice_reader
     except Exception as e:
-        print(f"Error cargando invoice-reader.py: {e}")
+        print(f"Error cargando invoice_reader.py: {e}")
         return None
 
 def cargar_invoices():
@@ -49,7 +49,7 @@ def cargar_invoices():
 
 def procesar_imagen_telegram(imagen_path):
     """
-    Procesa una imagen recibida desde Telegram.
+    Procesar imagen recibida.
     
     Args:
         imagen_path: Ruta completa a la imagen
@@ -57,7 +57,7 @@ def procesar_imagen_telegram(imagen_path):
     Returns:
         bool: True si todo el proceso fue exitoso
     """
-    print("PROCESADOR DE IMAGEN DESDE TELEGRAM")
+    print("PROCESADOR DE IMAGEN")
     print("=" * 50)
     print(f"Imagen: {imagen_path}")
     print(f"Inicio: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}")

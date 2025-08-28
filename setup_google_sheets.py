@@ -19,6 +19,7 @@ class CSVColumns(Enum):
     ID_TRANSACCION = "id_transaccion"
     CUENTA_ORIGEN = "cuenta_origen"
     ARCHIVO_IMAGEN = "archivo_imagen"
+    ID = "id"
 
 class CSVColumnsNames(Enum):
     FECHA_PROCESAMIENTO = "Fecha Procesamiento"
